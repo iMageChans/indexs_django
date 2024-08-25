@@ -98,6 +98,11 @@ DATABASES = {
         'PASSWORD': 'django_password',
         'HOST': 'web_db',
         'PORT': '5432',
+        'CONN_MAX_AGE': 600,
+        'MAX_CONNS': 50,
+        'OPTIONS': {
+            'client_encoding': 'UTF8',
+        },
     }
 }
 
