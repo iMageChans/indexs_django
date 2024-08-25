@@ -36,89 +36,83 @@ async function Merchant(ctx: ProcessorContext<Store>) {
             console.info(decodedEvent)
             let data: Events;
 
-            switch (decodedEvent.__kind) {
-                case "SubscriptionExtended":
-                    data = {
-                        block_hash: block.header.hash,
-                        block_number: block.header.height,
-                        d9: 0n,
-                        event_id: event.id,
-                        extrinsic_hash: event.extrinsic!.hash,
-                        fee: event.extrinsic?.fee || 0n,
-                        from_address: SS58Encode(decodedEvent.accountId),
-                        timestamp: new Date(event.block.timestamp!),
-                        to_address: SS58Encode(ContractAddress.MERCHANT),
-                        usdt: decodedEvent.usdt,
-                        actions: "SubscriptionExtended"
-                    }
-                    await TokenTransfers(data)
-                    break
-                case "GreenPointsTransaction":
-                    let Gdata: green_points = {
-                        block_hash: block.header.hash,
-                        block_number: block.header.height,
-                        d9: 0n,
-                        event_id: event.id,
-                        extrinsic_hash: event.extrinsic!.hash,
-                        fee: event.extrinsic?.fee || 0n,
-                        from_address: SS58Encode(decodedEvent.merchant.accountId),
-                        timestamp: new Date(event.block.timestamp!),
-                        to_address: SS58Encode(decodedEvent.consumer.accountId),
-                        usdt: 0n,
-                        merchant_points: decodedEvent.merchant.greenPoints,
-                        consumer_points: decodedEvent.consumer.greenPoints,
-                        actions: "GreenPointsTransaction"
-                    }
-                    await GreenPointTransfers(Gdata)
-                    break
-                case "D9MerchantPaymentSent":
-                    data = {
-                        block_hash: block.header.hash,
-                        block_number: block.header.height,
-                        d9: decodedEvent.amount,
-                        event_id: event.id,
-                        extrinsic_hash: event.extrinsic!.hash,
-                        fee: event.extrinsic?.fee || 0n,
-                        from_address: SS58Encode(decodedEvent.consumer),
-                        timestamp: new Date(event.block.timestamp!),
-                        to_address: SS58Encode(decodedEvent.merchant),
-                        usdt: 0n,
-                        actions: "D9MerchantPaymentSent"
-                    }
-                    await TokenTransfers(data)
-                    break
-                case "USDTMerchantPaymentSent":
-                    data = {
-                        block_hash: block.header.hash,
-                        block_number: block.header.height,
-                        d9: 0n,
-                        event_id: event.id,
-                        extrinsic_hash: event.extrinsic!.hash,
-                        fee: event.extrinsic?.fee || 0n,
-                        from_address: SS58Encode(decodedEvent.consumer),
-                        timestamp: new Date(event.block.timestamp!),
-                        to_address: SS58Encode(decodedEvent.merchant),
-                        usdt: decodedEvent.amount,
-                        actions: "USDTMerchantPaymentSent"
-                    }
-                    await TokenTransfers(data)
-                    break
-                case "GivePointsUSDT":
-                    data = {
-                        block_hash: block.header.hash,
-                        block_number: block.header.height,
-                        d9: 0n,
-                        event_id: event.id,
-                        extrinsic_hash: event.extrinsic!.hash,
-                        fee: event.extrinsic?.fee || 0n,
-                        from_address: SS58Encode(decodedEvent.merchant),
-                        timestamp: new Date(event.block.timestamp!),
-                        to_address: SS58Encode(ContractAddress.MERCHANT),
-                        usdt: decodedEvent.amount,
-                        actions: "GivePointsUSDT"
-                    }
-                    await TokenTransfers(data)
-                    break
+            if (decodedEvent.__kind === "SubscriptionExtended") {
+                data = {
+                    block_hash: block.header.hash,
+                    block_number: block.header.height,
+                    d9: 0n,
+                    event_id: event.id,
+                    extrinsic_hash: event.extrinsic!.hash,
+                    fee: event.extrinsic?.fee || 0n,
+                    from_address: SS58Encode(decodedEvent.accountId),
+                    timestamp: new Date(event.block.timestamp!),
+                    to_address: SS58Encode(ContractAddress.MERCHANT),
+                    usdt: decodedEvent.usdt,
+                    actions: "SubscriptionExtended"
+                }
+                await TokenTransfers(data)
+            } else if (decodedEvent.__kind === "GreenPointsTransaction") {
+                let Gdata: green_points = {
+                    block_hash: block.header.hash,
+                    block_number: block.header.height,
+                    d9: 0n,
+                    event_id: event.id,
+                    extrinsic_hash: event.extrinsic!.hash,
+                    fee: event.extrinsic?.fee || 0n,
+                    from_address: SS58Encode(decodedEvent.merchant.accountId),
+                    timestamp: new Date(event.block.timestamp!),
+                    to_address: SS58Encode(decodedEvent.consumer.accountId),
+                    usdt: 0n,
+                    merchant_points: decodedEvent.merchant.greenPoints,
+                    consumer_points: decodedEvent.consumer.greenPoints,
+                    actions: "GreenPointsTransaction"
+                }
+                await GreenPointTransfers(Gdata)
+            } else if (decodedEvent.__kind === "D9MerchantPaymentSent") {
+                data = {
+                    block_hash: block.header.hash,
+                    block_number: block.header.height,
+                    d9: decodedEvent.amount,
+                    event_id: event.id,
+                    extrinsic_hash: event.extrinsic!.hash,
+                    fee: event.extrinsic?.fee || 0n,
+                    from_address: SS58Encode(decodedEvent.consumer),
+                    timestamp: new Date(event.block.timestamp!),
+                    to_address: SS58Encode(decodedEvent.merchant),
+                    usdt: 0n,
+                    actions: "D9MerchantPaymentSent"
+                }
+                await TokenTransfers(data)
+            } else if (decodedEvent.__kind === "USDTMerchantPaymentSent") {
+                data = {
+                    block_hash: block.header.hash,
+                    block_number: block.header.height,
+                    d9: 0n,
+                    event_id: event.id,
+                    extrinsic_hash: event.extrinsic!.hash,
+                    fee: event.extrinsic?.fee || 0n,
+                    from_address: SS58Encode(decodedEvent.consumer),
+                    timestamp: new Date(event.block.timestamp!),
+                    to_address: SS58Encode(decodedEvent.merchant),
+                    usdt: decodedEvent.amount,
+                    actions: "USDTMerchantPaymentSent"
+                }
+                await TokenTransfers(data)
+            } else if (decodedEvent.__kind === "GivePointsUSDT") {
+                data = {
+                    block_hash: block.header.hash,
+                    block_number: block.header.height,
+                    d9: 0n,
+                    event_id: event.id,
+                    extrinsic_hash: event.extrinsic!.hash,
+                    fee: event.extrinsic?.fee || 0n,
+                    from_address: SS58Encode(decodedEvent.merchant),
+                    timestamp: new Date(event.block.timestamp!),
+                    to_address: SS58Encode(ContractAddress.MERCHANT),
+                    usdt: decodedEvent.amount,
+                    actions: "GivePointsUSDT"
+                }
+                await TokenTransfers(data)
             }
         }
     }
