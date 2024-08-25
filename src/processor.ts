@@ -66,7 +66,7 @@ export const processor = new SubstrateBatchProcessor()
     })
     .setBlockRange({
         from: 2500000,
-        // to: 2801259
+        // to: 3036151
     })
 
 export type Fields = SubstrateBatchProcessorFields<typeof processor>
