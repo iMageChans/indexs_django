@@ -4,173 +4,70 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16a0362b-7cb7-44c7-b0e9-a5c454869944" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/create/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/indexs.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/entrypoint.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/indexs/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/indexs/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/indexs/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/indexs/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/indexs/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/transfers/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/utils/numbers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/create/utils/to_hex.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/indexs.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/entrypoint.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/indexs/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/indexs/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/indexs/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/indexs/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/indexs/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/transfers/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/utils/numbers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/list/utils/to_hex.py" beforeDir="false" />
-    </list>
+    <list default="true" id="b4105626-9e38-467b-ae11-99e00eb5cde5" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
-    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="2l9E4xAGkOA4AztqPXX2sLdv8QK" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2l8hesNrIm7vcW76BOA5UcGPd6X" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Django 服务器.indexs.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/indexs_django/create",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "ts.external.directory.path": "D:\\indexs_django\\index-service\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/indexs_django/index-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\indexs_django\\index-service\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\indexs_django\create" />
-      <recent name="D:\indexs_django\list" />
-      <recent name="D:\indexs_django" />
+      <recent name="D:\node\index-service\src" />
+      <recent name="D:\node\index-service" />
+      <recent name="D:\node\index-service\abi" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\indexs_django\index-service" />
-      <recent name="D:\indexs_django" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="indexs" type="Python.DjangoServer" factoryName="Django server">
-      <module name="indexs" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="indexs.settings" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (indexs_django)" />
-      <option name="WORKING_DIRECTORY" value="D:\indexs_django" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="localhost" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-PY-242.20224.428" />
-        <option value="bundled-python-sdk-80e8e15d2b92-39cff9de6eef-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.20224.428" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-WS-242.20224.426" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="16a0362b-7cb7-44c7-b0e9-a5c454869944" name="更改" comment="" />
-      <created>1724583704713</created>
+      <changelist id="b4105626-9e38-467b-ae11-99e00eb5cde5" name="更改" comment="" />
+      <created>1724567708487</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1724583704713</updated>
-      <workItem from="1724583707817" duration="617000" />
-      <workItem from="1724584570410" duration="20166000" />
+      <updated>1724567708487</updated>
+      <workItem from="1724567709612" duration="32407000" />
+      <workItem from="1724604796987" duration="1630000" />
+      <workItem from="1724607830315" duration="262000" />
     </task>
     <servers />
   </component>
