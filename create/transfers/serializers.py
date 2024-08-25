@@ -4,6 +4,12 @@ from utils import numbers
 
 
 class TransferSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Transfer
+        fields = '__all__'
+
+class TransferListSerializer(serializers.ModelSerializer):
     d9_token = serializers.SerializerMethodField()
     usdt_token = serializers.SerializerMethodField()
     fee_token = serializers.SerializerMethodField()
@@ -24,6 +30,12 @@ class TransferSerializer(serializers.ModelSerializer):
 
 class GreenPointTransferSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = models.GreenPointTransfer
+        fields = '__all__'
+
+class GreenPointTransferListSerializer(serializers.ModelSerializer):
+
     merchant_green_point = serializers.SerializerMethodField()
     consumer_green_points = serializers.SerializerMethodField()
     fee_token = serializers.SerializerMethodField()
@@ -43,6 +55,13 @@ class GreenPointTransferSerializer(serializers.ModelSerializer):
 
 
 class SwapTransferSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SwapTransfer
+        fields = '__all__'
+
+
+class SwapTransferListSerializer(serializers.ModelSerializer):
 
     d9_token = serializers.SerializerMethodField()
     usdt_token = serializers.SerializerMethodField()

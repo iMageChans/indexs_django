@@ -8,7 +8,6 @@ from rest_framework.views import APIView
 from django.db.models import Q
 from rest_framework.pagination import PageNumberPagination
 from django.utils import timezone
-from django.db.models import Sum
 from utils import numbers
 
 
@@ -104,6 +103,16 @@ class SwapTransferViewSet(
             return {}
 
 
+class SwapTransferListViewSet(APIView):
+    pagination_class = CustomPagination
+
+    def get(self, request):
+        transfer = models.Transfer.objects.all()
+        paginator = self.pagination_class()
+        paginated_transfers = paginator.paginate_queryset(transfer, request)
+        return paginator.get_paginated_response(serializers.SwapTransferListSerializer(paginated_transfers, many=True).data)
+
+
 class D9TransfersViewSet(APIView):
     pagination_class = CustomPagination
 
@@ -116,8 +125,7 @@ class D9TransfersViewSet(APIView):
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
-            # 返回分页后的数据
-            return paginator.get_paginated_response(serializers.TransferSerializer(paginated_transfers, many=True).data)
+            return paginator.get_paginated_response(serializers.TransferListSerializer(paginated_transfers, many=True).data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -143,8 +151,7 @@ class USDTTransfersViewSet(APIView):
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
-            # 返回分页后的数据
-            return paginator.get_paginated_response(serializers.TransferSerializer(paginated_transfers, many=True).data)
+            return paginator.get_paginated_response(serializers.TransferListSerializer(paginated_transfers, many=True).data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -153,22 +160,16 @@ class USDTTransfersViewSet(APIView):
 class SwapTransferVolumeAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
-        # 获取当前时间
         now = timezone.now()
 
-        # 计算24小时前的时间
         last_24_hours = now - timezone.timedelta(hours=24)
 
-        # 查询过去24小时内的交易记录
         transfers = models.SwapTransfer.objects.filter(timestamp__gte=last_24_hours)
 
-        # 计算交易量（交易数量）
         transaction_count = transfers.count()
 
-        # 计算USDT的总和
         usdt_sum = sum(int(transfer.usdt) for transfer in transfers if transfer.usdt)
 
-        # 返回结果
         return Response({
             'transaction_count': transaction_count,
             'total_usdt': numbers.DecimalTruncation(3).format_usdt(usdt_sum),
