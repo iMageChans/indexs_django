@@ -25,6 +25,8 @@ services:
 
   processor:
     build: .
+    volumes:
+      - .:/squid
     environment:
       - DB_NAME=squid
       - DB_PORT=5432
