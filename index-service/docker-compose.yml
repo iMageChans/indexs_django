@@ -24,8 +24,7 @@ services:
 
 
   processor:
-    build:
-      context: ./index-service
+    build: .
     volumes:
       - ./index-service:/squid
     environment:
