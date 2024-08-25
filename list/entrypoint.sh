@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # 等待数据库服务启动
-while ! nc -z db 5432; do
+while ! nc -z web_db 5432; do
   echo "Waiting for PostgreSQL..."
   sleep 1
 done
