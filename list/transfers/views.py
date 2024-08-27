@@ -56,12 +56,12 @@ class USDTTransfersViewSet(APIView):
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])).filter(
                 Q(actions="LiquidityAdded") |
                 Q(actions="LiquidityRemoved") |
-                Q(to_address="D9ToUSDTConversion") |
-                Q(to_address="USDTToD9Conversion") |
-                Q(to_address="SubscriptionExtended") |
-                Q(to_address="USDTMerchantPaymentSent") |
-                Q(to_address="GivePointsUSDT") |
-                Q(to_address="USDTTransfer")
+                Q(actions="D9ToUSDTConversion") |
+                Q(actions="USDTToD9Conversion") |
+                Q(actions="SubscriptionExtended") |
+                Q(actions="USDTMerchantPaymentSent") |
+                Q(actions="GivePointsUSDT") |
+                Q(actions="USDTTransfer")
             ).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
