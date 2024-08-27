@@ -66,6 +66,8 @@ class SwapTransferListSerializer(serializers.ModelSerializer):
     d9_token = serializers.SerializerMethodField()
     usdt_token = serializers.SerializerMethodField()
     fee_token = serializers.SerializerMethodField()
+    d9_rate = serializers.SerializerMethodField()
+    usdt_rate = serializers.SerializerMethodField()
 
     class Meta:
         model = models.SwapTransfer
@@ -73,6 +75,14 @@ class SwapTransferListSerializer(serializers.ModelSerializer):
 
     def get_d9_token(self, obj):
         return numbers.DecimalTruncation(3).format_d9(obj.d9)
+
+    def get_d9_rate(self, obj):
+        res = float(numbers.format_d9(obj.d9)) / float(numbers.format_usdt(obj.usdt))
+        return numbers.DecimalTruncation(3).format(res)
+
+    def get_usdt_rate(self, obj):
+        res = float(numbers.format_usdt(obj.usdt)) / float(numbers.format_d9(obj.d9))
+        return numbers.DecimalTruncation(3).format(res)
 
     def get_usdt_token(self, obj):
         return numbers.DecimalTruncation(3).format_usdt(obj.usdt)
