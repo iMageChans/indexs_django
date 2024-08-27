@@ -21,7 +21,7 @@ class SwapTransferListViewSet(APIView):
     pagination_class = CustomPagination
 
     def get(self, request):
-        transfer = models.Transfer.objects.all().order_by('-block_number')
+        transfer = models.SwapTransfer.objects.all().order_by('-block_number')
         paginator = self.pagination_class()
         paginated_transfers = paginator.paginate_queryset(transfer, request)
         return paginator.get_paginated_response(serializers.SwapTransferListSerializer(paginated_transfers, many=True).data)
