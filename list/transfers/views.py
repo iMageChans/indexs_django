@@ -113,8 +113,8 @@ class SwapTransferVolumeAPIView(APIView):
         return Response({
             'transaction_count_last_24_hours': transaction_count_last_24_hours,
             'transaction_count_last_48_to_24_hours': transaction_count_last_48_to_24_hours,
-            'transaction_count_change_rate': transaction_count_change_rate,
+            'transaction_count_change_rate': numbers.DecimalTruncation(2).format(transaction_count_change_rate),
             'usdt_sum_last_24_hours': usdt_sum_last_24_hours,
             'usdt_sum_last_48_to_24_hours': usdt_sum_last_48_to_24_hours,
-            'usdt_sum_change_rate': usdt_sum_change_rate
+            'usdt_sum_change_rate': numbers.DecimalTruncation(2).format(usdt_sum_change_rate)
         })
