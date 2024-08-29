@@ -29,6 +29,23 @@ class SwapTransferListViewSet(APIView):
             serializers.SwapTransferListSerializer(paginated_transfers, many=True).data)
 
 
+class SwapTransferUsersListViewSet(APIView):
+    pagination_class = CustomPagination
+
+    def post(self, request):
+        serializer = serializers.D9TransferSerializer(data=request.data)
+        if serializer.is_valid():
+            validated_data = serializer.validated_data
+            transfer = models.SwapTransfer.objects.filter(
+                Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])
+            ).order_by('-block_number')
+            paginator = self.pagination_class()
+            paginated_transfers = paginator.paginate_queryset(transfer, request)
+            return paginator.get_paginated_response(
+                serializers.SwapTransferListSerializer(paginated_transfers, many=True).data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class D9TransfersViewSet(APIView):
     pagination_class = CustomPagination
 
