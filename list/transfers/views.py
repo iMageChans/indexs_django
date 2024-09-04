@@ -29,6 +29,22 @@ class SwapTransferListViewSet(APIView):
             serializers.SwapTransferListSerializer(paginated_transfers, many=True).data)
 
 
+class SwapTransferListQViewSet(APIView):
+
+    def get(self, request):
+        days = request.query_params.get('days', 30)
+
+        try:
+            # 转换 days 为整数
+            days = int(days)
+        except ValueError:
+            return Response({"error": "Invalid 'days' parameter"}, status=status.HTTP_400_BAD_REQUEST)
+        now = timezone.now()
+        one_month_ago = now - timedelta(days=days)
+        transfer = models.SwapTransfer.filter(timestamp__gte=one_month_ago).order_by('-block_number')
+        return Response(serializers.SwapTransferListSerializer(transfer, many=True).data, status=status.HTTP_200_OK)
+
+
 class SwapTransferUsersListViewSet(APIView):
     pagination_class = CustomPagination
 
