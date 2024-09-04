@@ -41,7 +41,7 @@ class SwapTransferListQViewSet(APIView):
             return Response({"error": "Invalid 'days' parameter"}, status=status.HTTP_400_BAD_REQUEST)
         now = timezone.now()
         one_month_ago = now - timedelta(days=days)
-        transfer = models.SwapTransfer.filter(timestamp__gte=one_month_ago).order_by('-block_number')
+        transfer = models.SwapTransfer.objects.filter(timestamp__gte=one_month_ago).order_by('-block_number')
         return Response(serializers.SwapTransferListSerializer(transfer, many=True).data, status=status.HTTP_200_OK)
 
 
