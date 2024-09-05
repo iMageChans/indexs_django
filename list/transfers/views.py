@@ -22,7 +22,7 @@ class SwapTransferListViewSet(APIView):
     pagination_class = CustomPagination
 
     def get(self, request):
-        transfer = models.SwapTransfer.objects.all().order_by('-block_number')
+        transfer = models.SwapTransfer.objects.all().order_by('-block_number').distinct('extrinsic_hash')
         paginator = self.pagination_class()
         paginated_transfers = paginator.paginate_queryset(transfer, request)
         return paginator.get_paginated_response(
@@ -54,7 +54,7 @@ class SwapTransferUsersListViewSet(APIView):
             validated_data = serializer.validated_data
             transfer = models.SwapTransfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])
-            ).order_by('-block_number')
+            ).order_by('-block_number').distinct('extrinsic_hash')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
             return paginator.get_paginated_response(
@@ -71,7 +71,7 @@ class D9TransfersViewSet(APIView):
             validated_data = serializer.validated_data
             transfer = (models.Transfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address']))
-                        .order_by('-block_number'))
+                        .order_by('-block_number').distinct('extrinsic_hash'))
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
@@ -98,7 +98,7 @@ class USDTTransfersViewSet(APIView):
                 Q(actions="USDTMerchantPaymentSent") |
                 Q(actions="GivePointsUSDT") |
                 Q(actions="USDTTransfer")
-            ).order_by('-block_number')
+            ).order_by('-block_number').distinct('extrinsic_hash')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
