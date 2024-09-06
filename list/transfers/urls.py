@@ -4,7 +4,8 @@ from transfers.views import (D9TransfersViewSet,
                              SwapTransferVolumeAPIView,
                              SwapTransferListViewSet,
                              SwapTransferUsersListViewSet,
-                             SwapTransferListQViewSet)
+                             SwapTransferListQViewSet,
+                             TransferFromAddressCountView)
 
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path('swap/users/transfers/', SwapTransferUsersListViewSet.as_view(), name='swap-user-transfer'),
     path('swap/q/transfers/', SwapTransferListQViewSet.as_view(), name='swap-q-transfer'),
     path('swap/transfers/day/', SwapTransferVolumeAPIView.as_view(), name='swap-transfer-24h-volume'),
+    path('transfers/count/', TransferFromAddressCountView.as_view(), name='transfers-count'),
 ]

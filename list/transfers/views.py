@@ -152,3 +152,15 @@ class SwapTransferVolumeAPIView(APIView):
             'usdt_sum_last_48_to_24_hours': usdt_sum_last_48_to_24_hours,
             'usdt_sum_change_rate': numbers.DecimalTruncation(2).format(usdt_sum_change_rate)
         })
+
+
+class TransferFromAddressCountView(APIView):
+    def get(self, request, format=None):
+        # 去除 from_address 重复的记录并计算数量
+        distinct_count = models.Transfer.objects.values('from_address').distinct().count()
+
+        # 返回结果
+        return Response(
+            {"distinct_from_address_count": distinct_count},
+            status=status.HTTP_200_OK
+        )
