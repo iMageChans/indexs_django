@@ -1,15 +1,14 @@
-from rest_framework.viewsets import mixins, GenericViewSet
 from transfers import models
 from transfers import serializers
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.settings import api_settings
 from rest_framework.views import APIView
 from django.db.models import Q
 from rest_framework.pagination import PageNumberPagination
 from django.utils import timezone
 from utils import numbers
 from datetime import timedelta
+from django.db.models import Subquery
 
 
 class CustomPagination(PageNumberPagination):
@@ -22,8 +21,8 @@ class SwapTransferListViewSet(APIView):
     pagination_class = CustomPagination
 
     def get(self, request):
-        transfer = models.SwapTransfer.objects.all().order_by('-block_number')
-        transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash')
+        subquery = models.SwapTransfer.objects.order_by('extrinsic_hash').distinct('extrinsic_hash').values('id')
+        transfer = models.SwapTransfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
         paginator = self.pagination_class()
         paginated_transfers = paginator.paginate_queryset(transfer, request)
         return paginator.get_paginated_response(
@@ -54,10 +53,10 @@ class SwapTransferUsersListViewSet(APIView):
         serializer = serializers.D9TransferSerializer(data=request.data)
         if serializer.is_valid():
             validated_data = serializer.validated_data
-            transfer = models.SwapTransfer.objects.filter(
+            subquery = models.SwapTransfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])
-            ).order_by('-block_number')
-            transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash')
+            ).order_by('extrinsic_hash').distinct('extrinsic_hash').values('id')
+            transfer = models.SwapTransfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
             return paginator.get_paginated_response(
@@ -72,10 +71,13 @@ class D9TransfersViewSet(APIView):
         serializer = serializers.D9TransferSerializer(data=request.data)
         if serializer.is_valid():
             validated_data = serializer.validated_data
-            transfer = models.Transfer.objects.filter(
+            subquery = (models.Transfer.objects.filter(
                 Q(from_address=validated_data['from_address']) |
-                Q(to_address=validated_data['to_address'])).order_by('-block_number')
-            transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash')
+                Q(to_address=validated_data['to_address']))
+                        .order_by('extrinsic_hash')
+                        .distinct('extrinsic_hash')
+                        .values('id'))
+            transfer = models.Transfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
@@ -92,7 +94,7 @@ class USDTTransfersViewSet(APIView):
         serializer = serializers.USDTTransferSerializer(data=request.data)
         if serializer.is_valid():
             validated_data = serializer.validated_data
-            transfer = models.Transfer.objects.filter(
+            subquery = models.Transfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])).filter(
                 Q(actions="LiquidityAdded") |
                 Q(actions="LiquidityRemoved") |
@@ -102,8 +104,8 @@ class USDTTransfersViewSet(APIView):
                 Q(actions="USDTMerchantPaymentSent") |
                 Q(actions="GivePointsUSDT") |
                 Q(actions="USDTTransfer")
-            ).order_by('-block_number')
-            transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash')
+            ).order_by('extrinsic_hash').distinct('extrinsic_hash').values('id')
+            transfer = models.Transfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
