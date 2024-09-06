@@ -19,7 +19,8 @@ class TransferListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_d9_token(self, obj):
-        return numbers.DecimalTruncation(3).format_d9(obj.d9)
+        return obj.d9
+        # return numbers.DecimalTruncation(3).format_d9(obj.d9)
 
     def get_usdt_token(self, obj):
         return numbers.DecimalTruncation(3).format_usdt(obj.usdt)
