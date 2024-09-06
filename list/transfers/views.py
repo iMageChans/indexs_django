@@ -23,7 +23,7 @@ class SwapTransferListViewSet(APIView):
 
     def get(self, request):
         transfer = models.SwapTransfer.objects.all()
-        transfer = transfer.order_by('extrinsic_hash', '-block_number').distinct('extrinsic_hash')
+        transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash').order_by('-block_number')
         paginator = self.pagination_class()
         paginated_transfers = paginator.paginate_queryset(transfer, request)
         return paginator.get_paginated_response(
@@ -43,7 +43,7 @@ class SwapTransferListQViewSet(APIView):
         now = timezone.now()
         one_month_ago = now - timedelta(days=days)
         transfer = models.SwapTransfer.objects.filter(timestamp__gte=one_month_ago)
-        transfer = transfer.order_by('extrinsic_hash', '-block_number').distinct('extrinsic_hash')
+        transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash').order_by('-block_number')
         return Response(serializers.SwapTransferListSerializer(transfer, many=True).data, status=status.HTTP_200_OK)
 
 
@@ -57,7 +57,7 @@ class SwapTransferUsersListViewSet(APIView):
             transfer = models.SwapTransfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])
             )
-            transfer = transfer.order_by('extrinsic_hash', '-block_number').distinct('extrinsic_hash')
+            transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash').order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
             return paginator.get_paginated_response(
@@ -74,7 +74,7 @@ class D9TransfersViewSet(APIView):
             validated_data = serializer.validated_data
             transfer = (models.Transfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])))
-            transfer = transfer.order_by('extrinsic_hash', '-block_number').distinct('extrinsic_hash')
+            transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash').order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
@@ -102,7 +102,7 @@ class USDTTransfersViewSet(APIView):
                 Q(actions="GivePointsUSDT") |
                 Q(actions="USDTTransfer")
             )
-            transfer = transfer.order_by('extrinsic_hash', '-block_number').distinct('extrinsic_hash')
+            transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash').order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
