@@ -21,8 +21,8 @@ class SwapTransferListViewSet(APIView):
     pagination_class = CustomPagination
 
     def get(self, request):
-        subquery = models.SwapTransfer.objects.order_by('extrinsic_hash').distinct('extrinsic_hash').values('id')
-        transfer = models.SwapTransfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
+        subquery = models.SwapTransfer.objects.order_by('extrinsic_hash').distinct('extrinsic_hash').values('event_id')
+        transfer = models.SwapTransfer.objects.filter(event_id__in=Subquery(subquery)).order_by('-block_number')
         paginator = self.pagination_class()
         paginated_transfers = paginator.paginate_queryset(transfer, request)
         return paginator.get_paginated_response(
@@ -41,8 +41,8 @@ class SwapTransferListQViewSet(APIView):
             return Response({"error": "Invalid 'days' parameter"}, status=status.HTTP_400_BAD_REQUEST)
         now = timezone.now()
         one_month_ago = now - timedelta(days=days)
-        transfer = models.SwapTransfer.objects.filter(timestamp__gte=one_month_ago).order_by('-block_number')
-        transfer = transfer.order_by('extrinsic_hash').distinct('extrinsic_hash')
+        subquery = models.SwapTransfer.objects.filter(timestamp__gte=one_month_ago).order_by('extrinsic_hash').distinct('extrinsic_hash').values('event_id')
+        transfer = models.SwapTransfer.objects.filter(event_id__in=Subquery(subquery)).order_by('-block_number')
         return Response(serializers.SwapTransferListSerializer(transfer, many=True).data, status=status.HTTP_200_OK)
 
 
@@ -55,8 +55,8 @@ class SwapTransferUsersListViewSet(APIView):
             validated_data = serializer.validated_data
             subquery = models.SwapTransfer.objects.filter(
                 Q(from_address=validated_data['from_address']) | Q(to_address=validated_data['to_address'])
-            ).order_by('extrinsic_hash').distinct('extrinsic_hash').values('id')
-            transfer = models.SwapTransfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
+            ).order_by('extrinsic_hash').distinct('extrinsic_hash').values('event_id')
+            transfer = models.SwapTransfer.objects.filter(event_id__in=Subquery(subquery)).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
             return paginator.get_paginated_response(
@@ -76,8 +76,8 @@ class D9TransfersViewSet(APIView):
                 Q(to_address=validated_data['to_address']))
                         .order_by('extrinsic_hash')
                         .distinct('extrinsic_hash')
-                        .values('id'))
-            transfer = models.Transfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
+                        .values('event_id'))
+            transfer = models.Transfer.objects.filter(event_id__in=Subquery(subquery)).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
@@ -104,8 +104,8 @@ class USDTTransfersViewSet(APIView):
                 Q(actions="USDTMerchantPaymentSent") |
                 Q(actions="GivePointsUSDT") |
                 Q(actions="USDTTransfer")
-            ).order_by('extrinsic_hash').distinct('extrinsic_hash').values('id')
-            transfer = models.Transfer.objects.filter(id__in=Subquery(subquery)).order_by('-block_number')
+            ).order_by('extrinsic_hash').distinct('extrinsic_hash').values('event_id')
+            transfer = models.Transfer.objects.filter(event_id__in=Subquery(subquery)).order_by('-block_number')
             paginator = self.pagination_class()
             paginated_transfers = paginator.paginate_queryset(transfer, request)
 
